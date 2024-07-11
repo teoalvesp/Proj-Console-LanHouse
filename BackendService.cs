@@ -1,5 +1,6 @@
-public static class Validation
+public static class BackendService
 {
+
     public static bool ValidateLogin(string user, string password)
     {
         if (user == "adm" && password == "123")
@@ -8,4 +9,11 @@ public static class Validation
         }
         return false;
     }
+
+    public static void RentDesktop(int DesktopNumber)
+    {
+
+    }
+
+
 }

@@ -2,8 +2,10 @@
 static void Start()
 {
 
-    Display.Init();
-    Display.Login();
+    FrontendService.DisplayLogo();
+    //FrontendService.Login();
+    FrontendService.Menu();
+
 }
 
 Start();
