@@ -10,10 +10,6 @@ public static class BackendService
         return false;
     }
 
-    public static void RentDesktop(int DesktopNumber)
-    {
-
-    }
 
 
 }

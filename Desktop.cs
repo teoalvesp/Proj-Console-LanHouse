@@ -6,7 +6,7 @@ public class Desktop
     public Desktop(int number)
     {
         Number = number;
-        isOccupied = true;
+        isOccupied = false;
     }
 
     // método para alugar o Desktop
@@ -15,11 +15,11 @@ public class Desktop
         if (!isOccupied)
         {
             isOccupied = true;
-            Console.WriteLine($"O Desktop {Number} foi Alugado!");
+            Console.WriteLine($"\n>>Desktop {Number} Alugado!");
         }
         else
         {
-            Console.WriteLine($"Desktop {Number} já ocupado!");
+            Console.WriteLine($"\n>> Desktop {Number} já ocupado!");
         }
     }
 
@@ -29,11 +29,11 @@ public class Desktop
         if (isOccupied)
         {
             isOccupied = false;
-            Console.WriteLine($"O Desktop {Number} foi Liberado!");
+            Console.WriteLine($"\n>> Desktop {Number} Liberado!");
         }
         else
         {
-            Console.WriteLine($"O Desktop {Number} já está livre.");
+            Console.WriteLine($"\n>> Desktop {Number} já está livre.");
         }
     }
 
