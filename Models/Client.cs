@@ -2,12 +2,13 @@ public class Client
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Phone { get; set; }
     public List<DVD> RentedDVDs { get; set; }
 
-    public Client(int id, string name)
+    public Client(string name, string phone)
     {
-        Id = id;
         Name = name;
+        Phone = phone;
         RentedDVDs = new List<DVD>();
     }
 

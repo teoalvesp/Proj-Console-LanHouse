@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjConsoleLanHouse.Data;
 
@@ -11,9 +12,11 @@ using ProjConsoleLanHouse.Data;
 namespace Proj_Console_LanHause.Migrations
 {
     [DbContext(typeof(LanHouseContext))]
-    partial class LanHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20240719163317_addPhoneToClient")]
+    partial class addPhoneToClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

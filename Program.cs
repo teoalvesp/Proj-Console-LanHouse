@@ -1,5 +1,6 @@
 ﻿static void Start()
 {
+
     FrontendService.DisplayLogo();
 
     // Inicializar a LanHouse com o número de PCs
