@@ -5,7 +5,8 @@ public class DVD
     public string Genre { get; set; }
     public int Duration { get; set; }
     public bool IsRented { get; set; }
-    public Client? Client { get; set; }
+    public int? RentedById { get; set; } // Chave estrangeira
+    public Client? RentedBy { get; set; }
 
     public DVD(int id, string title, string genre, int duration)
     {
@@ -14,7 +15,7 @@ public class DVD
         Genre = genre;
         Duration = duration;
         IsRented = false;
-        Client = null;
+        RentedBy = null;
     }
 
     public void Rent(Client client)
@@ -22,12 +23,12 @@ public class DVD
         if (!IsRented)
         {
             IsRented = true;
-            Client = client;
-            Console.WriteLine($"The DVD '{Title}' was rented by {client.Name}.");
+            RentedBy = client;
+            Console.WriteLine($"O DVD '{Title}' foi alugado por {client.Name}.");
         }
         else
         {
-            Console.WriteLine($"The DVD '{Title}' is already rented.");
+            Console.WriteLine($"O DVD '{Title}' já está alugado.");
         }
     }
 
@@ -35,13 +36,13 @@ public class DVD
     {
         if (IsRented)
         {
+            Console.WriteLine($"O DVD '{Title}' foi devolvido por {RentedBy?.Name}.");
             IsRented = false;
-            Console.WriteLine($"The DVD '{Title}' was returned by {Client?.Name}.");
-            Client = null;
+            RentedBy = null;
         }
         else
         {
-            Console.WriteLine($"The DVD '{Title}' is not rented.");
+            Console.WriteLine($"O DVD '{Title}' não está alugado.");
         }
     }
 }
