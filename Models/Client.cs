@@ -30,11 +30,12 @@ public class Client
         if (RentedDVDs.Contains(dvd))
         {
             dvd.Release();
-            RentedDVDs.Remove(dvd);
+            RentedDVDs.Remove(dvd); // Remove o DVD da lista de DVDs alugados pelo cliente
         }
         else
         {
             Console.WriteLine($"O DVD '{dvd.Title}' não está alugado por este cliente.");
         }
     }
+
 }

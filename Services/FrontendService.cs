@@ -1,7 +1,3 @@
-using System.ComponentModel;
-using Azure.Core;
-using ProjConsoleLanHouse.Data;
-
 public enum MenuOption
 {
     Rent = 1,
@@ -36,14 +32,14 @@ public static class FrontendService
             if (is_logged)
             {
                 Console.WriteLine("\n<< Usuário logado com sucesso! >>");
-                Thread.Sleep(1700);
+                Thread.Sleep(1100);
                 Console.Clear();
                 break;
             }
             else
             {
                 Console.WriteLine("\n<< Usuário ou senha inválida! Tente novamente... >>");
-                Thread.Sleep(1700);
+                Thread.Sleep(1100);
                 Console.Clear();
                 DisplayLogo();
             }
@@ -99,7 +95,7 @@ public static class FrontendService
             }
             else if (option == "4")
             {
-                Thread.Sleep(1700);
+                Thread.Sleep(1100);
                 Console.Clear();
                 DisplayLogo();
                 DVDRentMenu();
@@ -107,15 +103,16 @@ public static class FrontendService
             else if (option == "5")
             {
                 Console.WriteLine("\nSaindo do programa...");
-                Thread.Sleep(1000);
+                Thread.Sleep(1100);
                 return (MenuOption.Exit, 0);
             }
             else
             {
                 Console.WriteLine("\n# Opção inválida. Tente novamente. #");
-                Thread.Sleep(1500);
+                Thread.Sleep(1100);
             }
         }
+        Console.Clear();
     }
 
     public static void DVDRentMenu()
@@ -139,7 +136,7 @@ public static class FrontendService
 
             if (newClient != null)
             {
-                Thread.Sleep(1700);
+                Thread.Sleep(1100);
                 Console.Clear();
 
                 ShowClientMenu(newClient);
@@ -151,11 +148,11 @@ public static class FrontendService
             var client = BackendService.GetClientByPhone(phone);
             if (client != null)
             {
-                Console.Write($"Cliente '{client.Name}' encontrado. Confirmar? (s/n): ");
+                Console.Write($"\n>> Cliente '{client.Name}' encontrado. Confirmar? (s/n): ");
                 string confirmation = Console.ReadLine()?.Trim().ToLower() ?? "";
                 if (confirmation == "s")
                 {
-                    Thread.Sleep(1700);
+                    Thread.Sleep(1100);
                     Console.Clear();
 
                     ShowClientMenu(client);
@@ -167,7 +164,7 @@ public static class FrontendService
             }
             else
             {
-                Console.Write("Cliente não encontrado. Deseja cadastrar um novo cliente?(s/n): ");
+                Console.Write("\n>> Cliente não encontrado. Deseja cadastrar um novo cliente?(s/n): ");
                 string confirmation = Console.ReadLine()?.Trim().ToLower() ?? "";
                 if (confirmation == "s")
                 {
@@ -184,7 +181,7 @@ public static class FrontendService
 
                     if (newClient != null)
                     {
-                        Thread.Sleep(1700);
+                        Thread.Sleep(1100);
                         Console.Clear();
 
                         ShowClientMenu(newClient);
@@ -197,43 +194,195 @@ public static class FrontendService
 
     public static void ShowClientMenu(Client client)
     {
-        Console.WriteLine($"\n## Cliente: {client.Name} ##\n");
-        Console.WriteLine("1. Atualizar Dados do Cliente");
-        Console.WriteLine("2. Alugar DVD");
-        Console.WriteLine("3. Devolver DVD");
-        Console.WriteLine("4. Verificar DVDs alugados");
-        Console.WriteLine("5. Sair");
-        string option = Console.ReadLine()?.Trim() ?? "";
-
-        switch (option)
+        while (true)
         {
-            case "1":
-                Console.Write("Digite o novo número do telefone: ");
-                string newPhone = Console.ReadLine()?.Trim() ?? "";
-                BackendService.UpdateClientPhone(client, newPhone);
-                break;
-            case "2":
-                // Lógica para alugar DVD
-                // pode envolver listar DVDs disponíveis e permitir que o usuário escolha um para alugar
-                break;
-            case "3":
-                // Lógica para devolver DVD
-                //  pode envolver listar DVDs alugados pelo cliente e permitir que o usuário escolha um para devolver
-                break;
-            case "4":
-                var rentedDVDs = BackendService.GetRentedDVDs(client);
-                Console.WriteLine("DVDs alugados:");
-                foreach (var dvd in rentedDVDs)
-                {
-                    Console.WriteLine($"- {dvd.Title}");
-                }
-                break;
-            case "5":
-                Console.WriteLine("Saindo...");
-                break;
-            default:
-                Console.WriteLine("Opção inválida. Tente novamente.");
-                break;
+            Console.Clear();
+            DisplayLogo();
+            Console.WriteLine($"\n## Cliente: {client.Name} ##\n");
+            Console.WriteLine("1. Atualizar Dados do Cliente");
+            Console.WriteLine("2. Alugar DVD");
+            Console.WriteLine("3. Devolver DVD");
+            Console.WriteLine("4. Verificar DVDs alugados");
+            Console.WriteLine("5. Sair");
+            Console.Write("\nEscolha uma opção: ");
+            string option = Console.ReadLine()?.Trim() ?? "";
+
+            switch (option)
+            {
+                case "1":
+                    Console.Write("Digite o novo número do telefone: ");
+                    string newPhone = Console.ReadLine()?.Trim() ?? "";
+                    Console.Write("Digite o número novamente: ");
+                    string newPhoneConfirm = Console.ReadLine()?.Trim() ?? "";
+
+
+                    if (newPhone == newPhoneConfirm)
+                    {
+                        BackendService.UpdateClientPhone(client, newPhone);
+                        Console.WriteLine("\nNovo número cadastrado!");
+                        Thread.Sleep(1200);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nERRO >> Os números digitados não são iguais!");
+                        Thread.Sleep(1200);
+                    }
+                    break;
+
+                case "2":
+                    while (true)
+                    {
+                        var availableDVDs = BackendService.GetAvailableDVDs();
+
+                        if (availableDVDs.Count == 0)
+                        {
+                            Console.WriteLine("\n>> Nenhum DVD disponível para locação!");
+                            Thread.Sleep(1200);
+                            Console.Clear();
+                            break;
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("\n>> DVDs Disponíveis:");
+                        foreach (var dvd in availableDVDs)
+                        {
+                            // Exibe o ID do DVD como está no banco de dados
+                            Console.WriteLine($"DVD n.º: {dvd.Id}, Título: {dvd.Title}, Gênero: {dvd.Genre}");
+                        }
+
+                        Console.Write("\nDigite o n.º do DVD que deseja alugar (ou 'sair' para retornar ao menu principal): ");
+                        var input = Console.ReadLine()?.Trim();
+
+                        if (input?.ToLower() == "sair")
+                        {
+                            Console.Clear();
+                            break; // Sai do loop e retorna ao menu principal
+                        }
+
+                        if (int.TryParse(input, out int dvdId))
+                        {
+                            var dvd = availableDVDs.FirstOrDefault(d => d.Id == dvdId);
+                            if (dvd != null)
+                            {
+                                BackendService.RentDVD(client, dvd);
+                                Console.WriteLine($"\n>> O DVD '{dvd.Title}' foi alugado com sucesso.");
+                                Thread.Sleep(1400);
+                                Console.Clear();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Número do DVD inválido.");
+                                Thread.Sleep(1200);
+                                Console.Clear();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("ERRO >> Entrada inválida, digite um número válido ou 'sair'.");
+                            Thread.Sleep(1200);
+                            Console.Clear();
+                        }
+                    }
+                    break;
+
+
+
+                case "3":
+                    while (true)
+                    {
+                        // Obtém a lista de DVDs alugados pelo cliente
+                        var rentedDVDList = BackendService.GetRentedDVDs(client);
+
+                        if (rentedDVDList.Count == 0)
+                        {
+                            Console.WriteLine("\n>> O Cliente não tem DVDs alugados no momento.");
+                            Thread.Sleep(1200);
+                            Console.Clear();
+                            break;
+                        }
+
+                        Thread.Sleep(1200);
+                        Console.Clear();
+                        DisplayLogo();
+
+                        Console.WriteLine("\n>> DVDs Alugados:");
+                        foreach (var dvd in rentedDVDList)
+                        {
+                            // Exibe o ID do DVD mais 1
+                            Console.WriteLine($"DVD n.º: {dvd.Id + 1}, Título: {dvd.Title}, Gênero: {dvd.Genre}");
+                        }
+
+                        Console.Write("\nDigite o n.º do DVD a ser devolvido (ou 'sair' para retornar ao menu principal): ");
+                        var input = Console.ReadLine()?.Trim();
+
+                        if (input?.ToLower() == "sair")
+                        {
+                            Console.Clear();
+                            break; // Sai do loop e retorna ao menu principal
+                        }
+
+                        if (int.TryParse(input, out int displayedNumber))
+                        {
+                            // Obtém o ID real do DVD a partir do número exibido
+                            int dvdIdToRelease = displayedNumber - 1;
+                            var dvdToRelease = rentedDVDList.FirstOrDefault(d => d.Id == dvdIdToRelease);
+                            if (dvdToRelease != null)
+                            {
+                                // Chama o método correto para liberar o DVD
+                                BackendService.ReleaseDVD(client, dvdToRelease);
+                                Console.WriteLine($"\n>> O DVD '{dvdToRelease.Title}' foi devolvido com sucesso.");
+                                Thread.Sleep(1400);
+                                Console.Clear();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Número do DVD inválido.");
+                                Thread.Sleep(1200);
+                                Console.Clear();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("ERRO >> Entrada inválida, digite um número válido ou 'sair'.");
+                            Thread.Sleep(1200);
+                            Console.Clear();
+                        }
+                    }
+                    break;
+
+                case "4":
+                    var rentedDVDs = BackendService.GetRentedDVDs(client);
+                    if (rentedDVDs.Count == 0)
+                    {
+                        Console.WriteLine("\n>> Nenhum DVD alugado para este Cliente.");
+                        Thread.Sleep(1200);
+                        break;
+                    }
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                    DisplayLogo();
+
+                    Console.WriteLine("DVDs alugados:");
+                    foreach (var dvd in rentedDVDs)
+                    {
+                        Console.WriteLine($"- {dvd.Title}");
+                    }
+                    Console.Write("\nPressione qualquer tecla para sair...");
+                    Console.ReadKey();
+
+                    break;
+
+                case "5":
+                    Console.WriteLine("Saindo...");
+                    return;
+
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Thread.Sleep(1200);
+                    break;
+            }
         }
     }
 

@@ -1,5 +1,5 @@
-using System.ComponentModel;
 using ProjConsoleLanHouse.Data;
+using Microsoft.EntityFrameworkCore;
 
 public static class BackendService
 {
@@ -45,6 +45,15 @@ public static class BackendService
         }
     }
 
+    public static List<DVD> GetAvailableDVDs()
+    {
+        using (var context = new LanHouseContext())
+        {
+            return context.DVDs.Where(dvd => !dvd.IsRented).ToList();
+        }
+    }
+
+
     public static void RentDVD(Client client, DVD dvd)
     {
         using (var context = new LanHouseContext())
@@ -63,12 +72,21 @@ public static class BackendService
     {
         using (var context = new LanHouseContext())
         {
-            var existingDVD = context.DVDs.Find(dvd.Id);
+            // Inclui a propriedade de navegação 'RentedBy' para garantir que ela seja carregada
+            var existingDVD = context.DVDs
+                .Include(d => d.RentedBy)
+                .FirstOrDefault(d => d.Id == dvd.Id);
+
             if (existingDVD != null && existingDVD.RentedBy != null && existingDVD.RentedBy.Id == client.Id)
             {
                 existingDVD.IsRented = false;
                 existingDVD.RentedBy = null;
                 context.SaveChanges();
+
+            }
+            else
+            {
+                Console.WriteLine("ERRO >> O DVD não está alugado por este cliente ou não está alugado.");
             }
         }
     }

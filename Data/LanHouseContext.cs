@@ -7,6 +7,7 @@ namespace ProjConsoleLanHouse.Data
         public DbSet<DVD> DVDs { get; set; }
         public DbSet<Client> Clients { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Configuração da string de conexão com o banco de dados

@@ -38,11 +38,12 @@ public class DVD
         {
             Console.WriteLine($"O DVD '{Title}' foi devolvido por {RentedBy?.Name}.");
             IsRented = false;
-            RentedBy = null;
+            RentedBy = null; // Remove a referência ao cliente
         }
         else
         {
             Console.WriteLine($"O DVD '{Title}' não está alugado.");
         }
     }
+
 }

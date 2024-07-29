@@ -3,11 +3,6 @@
 
     FrontendService.DisplayLogo();
 
-    // Inicializar a LanHouse com o número de PCs
-    LanHouse lanHouse = new LanHouse(5);
-
-    // Login de Usuário
-    FrontendService.Login();
 
     // Interação do Menu com o Usuário
     while (true)
@@ -20,15 +15,15 @@
         {
             case MenuOption.Rent:
                 // aluga o desktop com número desktopNumber
-                lanHouse.RentDesktop(desktopNumber);
+                Console.WriteLine("Em Desenvolvimento");
                 break;
             case MenuOption.Release:
                 // libera o desktop com número desktopNumber
-                lanHouse.ReleaseDesktop(desktopNumber);
+                Console.WriteLine("Em Desenvolvimento");
                 break;
             case MenuOption.DisplayStatus:
                 // exibi o status dos PCs
-                lanHouse.DisplayStatus();
+                Console.WriteLine("Em Desenvolvimento");
                 break;
             case MenuOption.Exit:
                 // Encerra o programa

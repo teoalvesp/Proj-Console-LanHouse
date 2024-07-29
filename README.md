@@ -2,38 +2,45 @@
 
 ## Visão Geral
 
-O projeto de console LanHouse simula o funcionamento de uma locadora de computadores, onde é possível alugar, liberar e verificar o status dos PCs disponíveis na lan house.
+O projeto Console LanHouse é uma aplicação de console que simula uma lan house onde é possível gerenciar o aluguel e a devolução de DVDs. O objetivo principal é criar uma base sólida para um sistema mais complexo de gerenciamento de uma lan house, com funcionalidades básicas e uma estrutura de dados inicial.
 
 ## Funcionalidades Implementadas
 
-1. **Classe Desktop:**
+1. **CRUD de DVDs:**
 
-   - Representa cada computador na lan house.
-   - Atributos: número do desktop e estado de ocupação.
-   - Métodos: alugar e liberar.
+   - **Create:** Adicionar novos DVDs ao sistema.
+   - **Read:** Exibir informações sobre DVDs existentes.
+   - **Update:** Atualizar informações dos DVDs, como status e disponibilidade.
+   - **Delete:** Remover DVDs do sistema.
 
-2. **Classe LanHouse:**
+2. **Gerenciamento de Aluguel e Devolução de DVDs:**
 
-   - Gerencia a coleção de PCs (instâncias da classe Desktop).
-   - Métodos: adicionar PCs, alugar, liberar e exibir status.
+   - Alugar DVDs para clientes.
+   - Devolver DVDs e atualizar o status de disponibilidade.
+   - Exibir o status dos DVDs e a lista de DVDs alugados.
 
-3. **Menu Principal (FrontendService):**
-   - Interface de usuário por console.
-   - Opções: alugar PC, liberar PC, verificar status dos PCs e sair do programa.
-   - Implementação de validação de entrada para garantir escolhas válidas.
+3. **Interface de Usuário:**
+   - Menus interativos para gerenciar DVDs e aluguéis.
+   - Validação de entrada para garantir escolhas válidas.
 
 ## Próximos Passos
 
-1. **Implementação Adicional:**
+1. **Implementação de Desktop e LanHouse:**
 
-   - Adicionar funcionalidade de verificação detalhada do status dos PCs.
-   - Melhorar a interface de usuário para facilitar a navegação.
+   - Integrar a lista de desktops como um modelo associado a usuários, ao invés de clientes.
+   - Adicionar funcionalidades para alugar e liberar desktops, bem como verificar o status.
+   - Implementar a persistência de dados para desktops e sessões de usuário no banco de dados.
 
-2. **Melhorias Planejadas:**
-   - Implementar persistência de dados para manter informações dos PCs.
-   - Adicionar suporte a múltiplos usuários com login e logout.
-   - Integrar recursos de relatório e estatísticas de uso dos PCs.
+2. **Gerenciamento de Usuários:**
+
+   - Adicionar suporte para múltiplos usuários com login e sessão.
+   - Implementar a funcionalidade de verificar e carregar sessões de usuário ao iniciar a aplicação.
+
+3. **Melhorias Planejadas:**
+   - Expandir a interface de usuário para oferecer uma navegação mais intuitiva.
+   - Adicionar relatórios e estatísticas sobre o uso de DVDs e desktops.
+   - Implementar recursos adicionais conforme as necessidades do projeto evoluam.
 
 ## Conclusão
 
-O projeto atual proporciona uma experiência básica de gerenciamento de PCs em uma lan house, com funcionalidades principais de aluguel, liberação e verificação de status. Futuros desenvolvimentos visam expandir a aplicação com mais recursos e melhorias na usabilidade.
+Até agora, o projeto Console LanHouse oferece uma funcionalidade básica de gerenciamento de DVDs com CRUD e operações de aluguel e devolução. O próximo foco será a integração com o gerenciamento de desktops e usuários, além de melhorias na interface e na persistência de dados.
