@@ -1,6 +1,6 @@
 # Projeto Console LanHouse
 
-> **Atenção:** Este repositório foi migrado da minha conta antiga [@Theus-Alves](https://github.com/Theus-Alves), da qual perdi acesso após problemas com 2FA. O projeto é de minha autoria e está sendo mantido aqui para fins de portfólio.
+> **Atenção:** Este repositório foi migrado da minha conta antiga [@Theus-Alves](https://github.com/Theus-Alves), da qual perdi acesso após problemas com 2FA ao ser hackeado. O projeto é de minha autoria e está sendo mantido aqui para fins de portfólio.
 
 ---
 
