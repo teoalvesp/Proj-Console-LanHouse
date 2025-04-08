@@ -1,5 +1,9 @@
 # Projeto Console LanHouse
 
+> **Atenção:** Este repositório foi migrado da minha conta antiga [@Theus-Alves](https://github.com/Theus-Alves), da qual perdi acesso após problemas com 2FA. O projeto é de minha autoria e está sendo mantido aqui para fins de portfólio.
+
+---
+
 ## Visão Geral
 
 O projeto Console LanHouse é uma aplicação de console que simula uma lan house onde é possível gerenciar o aluguel e a devolução de DVDs. O objetivo principal é criar uma base sólida para um sistema mais complexo de gerenciamento de uma lan house, com funcionalidades básicas e uma estrutura de dados inicial.
